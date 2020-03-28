@@ -5,7 +5,7 @@
     <UserSecretsId>01e4eccc-04d6-4763-9542-11abe69111a7</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <ApplicationIcon></ApplicationIcon>
   </PropertyGroup>
 
