@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ToDoList.Contexts;
+using ToDoList.DbContexts;
 using ToDoList.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
@@ -28,8 +28,9 @@ namespace ToDoList
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddDbContext<SqliteContext>(options => options.UseSqlite("filename=.\\db.db"));
+            services.AddDbContext<SQLiteDbContext>(options => options.UseSqlite("filename=.\\db.db"));
 
         }
 
@@ -48,7 +49,7 @@ namespace ToDoList
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

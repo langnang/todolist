@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "待办事项列表";
+    Layout = "_ToDoLayout";
+}
+
+<div class="container">
+    <h1 class="text-center">ToDoList</h1>
+    <div class="input-group">
+        <span class="input-group-addon">@@ToDo</span>
+        <input type="text" id="input_todo" class="form-control" placeholder="ToDo">
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">代办事项</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group" id="panel_todo">
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">已办事项</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group" id="panel_done">
+            </ul>
+        </div>
+    </div>
+</div>
+
