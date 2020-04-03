@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ToDoList.DbContexts;
-using ToDoList.Models;
+using VueCliMiddleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
-
+using ToDoList.DbContexts;
 
 namespace ToDoList
 {
@@ -28,10 +22,18 @@ namespace ToDoList
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSession();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddDbContext<SQLiteDbContext>(options => options.UseSqlite("filename=.\\db.db"));
 
+            services.AddControllersWithViews().AddNewtonsoftJson(); 
+            services.AddDbContext<SQLiteDbContext>(options => options.UseSqlite("filename=.\\db.db"));
+            // In production, the React files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                // configuration.RootPath = "ClientApp/build";
+                configuration.RootPath = "ClientApp/dist";
+                
+
+            });
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,22 +45,34 @@ namespace ToDoList
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
+            app.UseSpaStaticFiles();
+
             app.UseRouting();
-
-            app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "api",
+                    pattern: "api/{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    // spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseVueCli(npmScript: "serve", port: 8080);
+                    // spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                }
             });
         }
     }

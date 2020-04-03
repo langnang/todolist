@@ -6,11 +6,16 @@ using Microsoft.AspNetCore.Http;
 
 namespace ToDoList.Models
 {
+    public class RequestModel 
+    { 
+        public string from { get; set; }
+        public Newtonsoft.Json.Linq.JObject data { get; set; }
+    }
     public class ResponseModel
     {
         public int status { get; set; }
         public string statusText { get; set; }
-        public object data { get; set; }
+        public Newtonsoft.Json.Linq.JObject data { get; set; }
     }
 
     public class UUIDModel

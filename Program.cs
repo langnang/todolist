@@ -20,7 +20,7 @@ namespace ToDoList
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://*:9501").UseStartup<Startup>();
+                    webBuilder.UseUrls("http://*:9103").UseStartup<Startup>();
                 });
     }
 }

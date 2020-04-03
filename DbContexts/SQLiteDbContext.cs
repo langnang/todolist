@@ -13,7 +13,9 @@ namespace ToDoList.DbContexts
         {
         }
         public DbSet<UserModel> User { get; set; }
+        public DbSet<AuthModel> Auth { get; set; }
         public DbSet<ToDoModel> ToDo { get; set; }
+        public DbSet<LogModel> Log { get; set; }
     }
 
 }
