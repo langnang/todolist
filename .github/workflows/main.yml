@@ -13,6 +13,7 @@ jobs:
 
       - name: Install and Build
         run: |
+          cd ClientApp
           npm install
           npm run build
 
