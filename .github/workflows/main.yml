@@ -22,4 +22,4 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: Client/dist
+          FOLDER: ClientApp/dist
