@@ -19,6 +19,9 @@ export default new Vuex.Store({
           }
           dispatch("loadToDoList");
         })
+        .catch(() => {
+          dispatch("loadToDoList");
+        })
     },
     signIn({ commit, getters, dispatch }) {
       this._vm.$axios
