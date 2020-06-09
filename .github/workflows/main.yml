@@ -13,7 +13,6 @@ jobs:
 
       - name: Install and Build
         run: |
-          cd ClientApp
           npm install
           npm run build
 
@@ -22,4 +21,4 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: ClientApp/dist
+          FOLDER: dist

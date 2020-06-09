@@ -1,7 +1,8 @@
 <template>
     <el-row type="flex" class="row-bg" justify="space-between">
-        <el-col :span="4" style="text-align:left;font-size:24px;">ToDoList</el-col>
+        <el-col :span="4" style="text-align:left;font-size:24px;">ToDoList - offline</el-col>
         <el-col :span="12" style="text-align:right;">
+            <el-button size="small" type="danger" icon="el-icon-refresh" circle></el-button>
             <el-button size="small" type="info" icon="el-icon-search" circle></el-button>
             <el-button size="small" type="info" icon="el-icon-plus" circle @click="toggleToDo"></el-button>
             <el-button
