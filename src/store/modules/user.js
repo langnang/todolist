@@ -2,12 +2,9 @@ export default {
     state: {
         visible: false,
         loading: false,
-        active: false,
+        active: 0,
         isSync: "",
         name: "",
-        password: "",
-        uuid: "",
-        token: {},
     },
     mutations: {
         toggleSignIn(state) {
@@ -20,10 +17,9 @@ export default {
             state.active = false;
         },
         setUser(state, payload) {
+            state.id = payload.id;
             state.name = payload.name;
-            state.uuid = payload.uuid;
-            state.token = payload.token;
-            state.active = true;
+            state.active = payload.active;
         },
     },
     getters: {
@@ -36,6 +32,23 @@ export default {
         },
     },
     actions: {
-
+        getUserInfo({ commit, dispatch }, token) {
+            dispatch("callAPI", {
+                url: "/user/info",
+                data: {
+                    token: token
+                }
+            }).then(function (res) {
+                console.log("success get user info");
+                if (res.status == 200 && res.data.status == 200) {
+                    commit("setUser", res.data.data.user);
+                } else {
+                    throw Error;
+                }
+            }).catch(function () {
+                console.log("failed get user info");
+                // window.localStorage.removeItem("token");
+            })
+        }
     }
 }

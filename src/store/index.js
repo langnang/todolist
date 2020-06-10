@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import user from './modules/user';
 import todo from './modules/todo';
+import token from './modules/token';
+import config from './../../app.config';
 
 Vue.use(Vuex)
 
@@ -10,6 +12,9 @@ export default new Vuex.Store({
   },
   getters: {},
   actions: {
+    callAPI(context, options) {
+      return this._vm.$axios.post(config.API_PATH + options.url, options.data);
+    },
     active({ commit, dispatch }) {
       this._vm.$axios
         .get("/api/user/active")
@@ -150,11 +155,10 @@ export default new Vuex.Store({
           }
         })
     },
-
-
   },
   modules: {
     user,
     todo,
+    token,
   }
 })

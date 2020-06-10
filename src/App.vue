@@ -21,7 +21,14 @@ export default {
         SigninDialog
     },
     created() {
-        this.$store.dispatch("active");
+        // this.$store.dispatch("active");
+        if (window.localStorage.getItem("token")) {
+            console.log("Have token");
+            let token = JSON.parse(window.localStorage.getItem("token"));
+            this.$store.dispatch("isTokenActive", token);
+        } else {
+            console.log("No token");
+        }
     }
 };
 </script>
@@ -39,5 +46,11 @@ html {
     margin-top: 5px;
     text-align: center;
     color: #2c3e50;
+}
+.particles-js-canvas-el {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 </style>

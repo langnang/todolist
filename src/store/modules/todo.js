@@ -51,5 +51,9 @@ export default {
         todoListChecked: state => state.list.some(item => item.checked == true)
     },
     actions: {
+        getTodos() { },
+        insertTodo() { },
+        deleteTodo() { },
+        updateTodo() { },
     }
 }

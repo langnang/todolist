@@ -1,8 +1,17 @@
 <template>
-    <el-row type="flex" class="row-bg" justify="space-between">
-        <el-col :span="4" style="text-align:left;font-size:24px;">ToDoList - offline</el-col>
-        <el-col :span="12" style="text-align:right;">
-            <el-button size="small" type="danger" icon="el-icon-refresh" circle></el-button>
+    <el-row type="flex" class="row-bg" justify="space-between" style="background:transparent;">
+        <el-col :span="12" style="text-align:left;font-size:24px;line-height:30px;">
+            ToDoList (h5) -
+            <span v-if="user.active">on</span>
+            <span v-else>off</span>line
+        </el-col>
+        <el-col :span="12" style="text-align:right;line-height:30px;">
+            <el-button
+                size="small"
+                :type="user.active?'info':'danger'"
+                icon="el-icon-refresh"
+                circle
+            ></el-button>
             <el-button size="small" type="info" icon="el-icon-search" circle></el-button>
             <el-button size="small" type="info" icon="el-icon-plus" circle @click="toggleToDo"></el-button>
             <el-button
@@ -19,9 +28,9 @@
                 icon="el-icon-user"
                 circle
                 v-if="!user.active"
-                @click="toggleSignIn"
+                @click="toSignIn"
             ></el-button>
-            <el-button size="small" type="info" circle v-if="user.active" @click="signOut">
+            <el-button size="small" type="info" circle v-if="user.active" @click="toSignOut">
                 <font-awesome-icon :icon="['fas','sign-out-alt']" size="xs" />
             </el-button>
         </el-col>
@@ -35,15 +44,27 @@ export default {
         return {};
     },
     computed: {
-        ...mapState([]),
+        ...mapState(["user"]),
         ...mapGetters(["todoListChecked", "user"])
     },
     methods: {
         ...mapMutations(["toggleToDo", "toggleSignIn"]),
-        ...mapActions(["batchDeleteToDo", "signOut"])
+        ...mapActions(["batchDeleteToDo", "signOut"]),
+        toSignIn() {
+            window.location.href = "https://langnang.github.io/#/sign-in";
+        },
+        toSignOut() {
+            window.location.href = "https://langnang.github.io/#/sign-out";
+        }
     }
 };
 </script>
 
-<style>
+<style scoped>
+.el-button--small {
+    /* font-size: 19px; */
+}
+.el-button--small.is-circle {
+    padding: 6px;
+}
 </style>
