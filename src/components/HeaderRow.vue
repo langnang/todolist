@@ -1,14 +1,19 @@
 <template>
-    <el-row type="flex" class="row-bg" justify="space-between" style="background:transparent;">
+    <el-row
+        type="flex"
+        class="row-bg"
+        justify="space-between"
+        style="background:transparent;padding:0 0 10px 0;"
+    >
         <el-col :span="12" style="text-align:left;font-size:24px;line-height:30px;">
             ToDoList (h5) -
-            <span v-if="user.active">on</span>
+            <span v-if="token.active">on</span>
             <span v-else>off</span>line
         </el-col>
         <el-col :span="12" style="text-align:right;line-height:30px;">
             <el-button
                 size="small"
-                :type="user.active?'info':'danger'"
+                :type="token.active?'info':'danger'"
                 icon="el-icon-refresh"
                 circle
             ></el-button>
@@ -27,10 +32,16 @@
                 type="info"
                 icon="el-icon-user"
                 circle
-                v-if="!user.active"
-                @click="toSignIn"
+                v-if="!token.active"
+                @click="redirectToSignIn"
             ></el-button>
-            <el-button size="small" type="info" circle v-if="user.active" @click="toSignOut">
+            <el-button
+                size="small"
+                type="info"
+                circle
+                v-if="token.active"
+                @click="redirectToSignOut"
+            >
                 <font-awesome-icon :icon="['fas','sign-out-alt']" size="xs" />
             </el-button>
         </el-col>
@@ -38,22 +49,21 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
     data() {
         return {};
     },
     computed: {
-        ...mapState(["user"]),
-        ...mapGetters(["todoListChecked", "user"])
+        ...mapGetters(["todoListChecked", "token"])
     },
     methods: {
         ...mapMutations(["toggleToDo", "toggleSignIn"]),
-        ...mapActions(["batchDeleteToDo", "signOut"]),
-        toSignIn() {
+        ...mapActions(["batchDeleteToDo"]),
+        redirectToSignIn() {
             window.location.href = "https://langnang.github.io/#/sign-in";
         },
-        toSignOut() {
+        redirectToSignOut() {
             window.location.href = "https://langnang.github.io/#/sign-out";
         }
     }

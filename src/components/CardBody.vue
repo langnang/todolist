@@ -1,9 +1,9 @@
 <template>
     <el-row>
-        <el-col :span="6" v-for="(todo,index) in list" :key="index">
+        <el-col :span="6" v-for="(todo,index) in list" :key="index" style="padding:6px;">
             <el-card class="box-card" shadow="hover">
                 <div slot="header" class="clearfix">
-                    <span>{{todo.name}}</span>
+                    <span>{{todo.title}}</span>
                     <el-row style="text-align:center;position:absolute;width:100%;bottom:-29px;">
                         <el-button
                             size="mini"
@@ -28,6 +28,7 @@
                         ></el-button>
                     </el-row>
                 </div>
+                <small>{{todo.desc}}</small>
                 <div class="content-html" v-html="marked(todo.content)"></div>
             </el-card>
         </el-col>
@@ -42,6 +43,12 @@ export default {
             list: state => state.todo.list
         })
     },
+    beforeMount() {
+        console.log("beforeMount");
+    },
+    mounted() {
+        console.log("mounted");
+    },
     methods: {
         ...mapMutations(["updateToDo", "toggleToDoItemChecked"]),
         ...mapActions(["deleteToDo"]),
@@ -52,12 +59,17 @@ export default {
 
 <style lang="scss" scoped>
 .el-card {
+    background: transparent;
     .el-row {
         // display: none;
     }
     &:hover .el-row {
         // display: block;
     }
+}
+.box-card {
+    border-radius: 10px;
+    // height: 150px;
 }
 .content-html {
     text-align: left;

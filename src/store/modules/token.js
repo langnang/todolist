@@ -2,34 +2,43 @@ export default {
     state: {
         id: "",
         token: "",
+        active: false
     },
     mutations: {
         setToken(state, token) {
             state.id = token.id;
             state.token = token.token;
+            state.active = !state.active;
         }
     },
-    getters: {},
+    getters: {
+        token: state => {
+            return {
+                id: state.id,
+                token: state.token,
+                active: state.active,
+            }
+        },
+    },
     actions: {
         isTokenActive({ commit, dispatch }, token) {
-            dispatch("callAPI", {
-                url: "/token/useable",
-                data: {
-                    token: token
-                }
-            }).then(function (res) {
-                if (res.status == 200 && res.data.status == 200) {
-                    console.log("token is active");
+            commit("setAppLoadingText", "isTokenActive");
+            dispatch("callTokenUseable", token)
+                .then(function (res) {
                     // token 可用
-                    commit("setToken", token);
-                    return
-                } else {
-                    throw Error;
-                }
-            }).catch(function () {
-                console.log("token is not active");
-                // window.localStorage.removeItem("token");
-            })
+                    if (res.status == 200 && res.data.status == 200) {
+                        commit("setAppLoadingText", "isTokenActive_success");
+                        commit("setToken", token);
+                        dispatch("getTodoList");
+                        return
+                    } else {
+                        throw Error("the token is not valid");
+                    }
+                }).catch(function (err) {
+                    commit("setAppLoadingText", "isTokenActive_error");
+                    console.error(err);
+                    // window.localStorage.removeItem("token");
+                }).finally(function () { })
         }
     }
 }

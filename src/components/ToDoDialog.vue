@@ -1,16 +1,19 @@
 <template>
     <el-dialog
-        title="新增代办事项"
+        title="代办事项"
         :visible.sync="todo.visible"
         v-loading="todo.loading"
         @closed="initToDo"
     >
         <el-form :model="todo">
             <el-form-item>
-                <el-input type="text" v-model="todo.name" autocomplete="off" placeholder="标题"></el-input>
+                <el-input type="text" v-model="todo.title" autocomplete="off" placeholder="标题"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input type="textarea" v-model="todo.content" :rows="8" placeholder="内容"></el-input>
+                <el-input type="text" v-model="todo.desc" autocomplete="off" placeholder="简述"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-input type="textarea" v-model="todo.content" :rows="6" placeholder="内容"></el-input>
             </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
