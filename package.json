@@ -1,9 +1,11 @@
 {
   "name": "todolist",
-  "version": "2.0.0",
-  "private": true,
+  "description": "待办事项列表",
+  "homepage": "https://github.com/langnang/ToDoList#readme",
+  "version": "0.1.0",
+  "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -54,5 +56,19 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "directories": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/langnang/ToDoList.git"
+  },
+  "keywords": [
+    "langnang",
+    "todolist"
+  ],
+  "author": "langnang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/langnang/ToDoList/issues"
+  }
 }

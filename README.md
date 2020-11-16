@@ -1,14 +1,9 @@
 # ToDoList
 
-## Version
-
-- off-line-h5
-- on-line-h5
-- web-app
+> 待办事项列表（离线缓存版）
 
 ## Progress
 
-1. 检测本地 Session
-   1. 存在：检测有效性
-   2. 不存在：忽略
-2.
+- 检测本地 Session:todo
+    - true：读取
+    - false：新建
