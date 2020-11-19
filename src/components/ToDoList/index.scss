@@ -1,0 +1,148 @@
+.todo-list-container {
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 10px 0;
+}
+
+.todo-list__header {
+  // border-bottom: 1px solid #cccccc;
+}
+
+.todo-list__new {
+  display: inline-table;
+  font-size: 14px;
+  position: relative;
+  width: 100%;
+
+  .todo-list__new--prefix {}
+
+  .todo-list__new--input {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    width: 100%;
+  }
+
+  .todo-list__new--suffix {}
+}
+
+.todo-list__body {
+  margin-top: 10px;
+}
+
+.todo-list__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 0;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  // line-height: 28px;
+}
+
+.todo-list__item {
+  background-color: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  display: block;
+
+  margin-bottom: -1px;
+  padding: 5px 15px;
+  position: relative;
+  text-align: left;
+
+  &:first-child {
+    border-top: 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
+  &:hover {
+    background-color: #cccccc;
+
+    .todo-list__item--actions {
+      display: inline;
+    }
+  }
+
+  svg {
+    padding: 5px 3px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+
+    &:hover {
+      fill: #409eff;
+    }
+  }
+}
+
+.todo-list__item--state {
+  // width: 30px;
+  // display: inline-block;
+  float: left;
+  height: 26px;
+  width: 16px;
+  margin-right: 10px;
+  // background-color: blue;
+}
+
+.todo-list__item--content {
+  display: inline-block;
+  line-height: 26px;
+  width: calc(100% - 70px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  // background-color: blueviolet;
+  &.inactive {
+    text-decoration: line-through;
+    opacity: 0.4;
+  }
+}
+
+.todo-list__item--edit {
+  display: none;
+
+  // background-color: burlywood;
+  input {
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 12px;
+    line-height: 26px;
+    border-bottom: 1px solid black;
+    margin-bottom: -1px;
+    background-color: transparent;
+    // background-color: burlywood;
+  }
+}
+
+.todo-list__item--actions {
+  display: none;
+  float: right;
+}
+
+.todo-list__footer {
+  margin-top: 10px;
+}
+
+.target-active {
+  color: #409eff;
+  border-color: #c6e2ff;
+  background-color: #ecf5ff;
+}

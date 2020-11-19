@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+// import store from "./../store";
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -32,6 +34,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   to.meta.title += " · ToDoList";
+  // console.log(store);
   next();
 });
 

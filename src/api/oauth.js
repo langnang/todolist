@@ -24,9 +24,15 @@ export const sign_in = ({ code }) => {
   });
 };
 
-export const set_token = (token) =>
+export const login = () => {};
+
+export const logout = () => {};
+
+export const isLogin = () => {};
+
+export const getToken = () => JSON.parse(localStorage.getItem(tokenKey));
+
+export const setToken = (token) =>
   localStorage.setItem(tokenKey, JSON.stringify(token));
 
-export const get_token = () => JSON.parse(localStorage.getItem(tokenKey));
-
-export const delete_token = () => localStorage.removeItem(tokenKey);
+export const removeToken = () => localStorage.removeItem(tokenKey);

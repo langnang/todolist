@@ -6,12 +6,10 @@
   >
     <HeaderRow />
     <el-scrollbar>
+      <router-view></router-view>
       <CardBody />
     </el-scrollbar>
     <ToDoDialog />
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
   </div>
 </template>
 
@@ -65,7 +63,7 @@ html {
   z-index: -1;
 }
 .el-scrollbar__wrap {
-  height: calc(100vh - 30px) !important;
+  height: calc(100vh - 33px) !important;
 }
 .el-card.is-always-shadow,
 .el-card.is-hover-shadow:focus,

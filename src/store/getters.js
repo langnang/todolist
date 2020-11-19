@@ -6,4 +6,7 @@ export default {
       active: state.token.active,
     };
   },
+  todoListChecked: (state) =>
+    state?.todo?.list.some((item) => item.checked == true),
+  client_id: (state) => state.oauth.client_id,
 };

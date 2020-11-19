@@ -8,6 +8,10 @@ import router from "./routes";
 
 Vue.config.productionTip = false;
 
+Vue.prototype.redirectTo = (url) => {
+  window.location.href = url;
+};
+
 new Vue({
   store,
   router,

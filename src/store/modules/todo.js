@@ -65,7 +65,6 @@ export default {
       }
       return result;
     },
-    todoListChecked: (state) => state.list.some((item) => item.checked == true),
   },
   actions: {
     loadToDoList({ state, commit }) {
@@ -111,22 +110,22 @@ export default {
         dispatch("insertTodo");
       }
     },
-    deleteToDo({ commit, dispatch }, index) {
-      let opts = { msg: "delete_todo" };
+    deleteToDo({ commit }, index) {
+      // let opts = { msg: "delete_todo" };
       commit("updateToDo", index);
       commit("toggleToDo");
-      dispatch("callTodoDelete")
-        .then(function(res) {
-          if (res.status == 200 && res.data.status == 200) {
-            opts.type = "success";
-            commit("deleteToDo", index); // 删除待办事项
-          } else {
-            opts.type = "error";
-          }
-        })
-        .finally(function() {
-          dispatch("notify", opts);
-        });
+      // dispatch("callTodoDelete")
+      //   .then(function(res) {
+      //     if (res.status == 200 && res.data.status == 200) {
+      //       opts.type = "success";
+      //       commit("deleteToDo", index); // 删除待办事项
+      //     } else {
+      //       opts.type = "error";
+      //     }
+      //   })
+      //   .finally(function() {
+      //     dispatch("notify", opts);
+      //   });
     },
     batchDeleteToDo({ state, dispatch }) {
       let list = state.todo.list;
@@ -134,60 +133,60 @@ export default {
         if (list[i].checked == true) dispatch("deleteToDo", i);
       }
     },
-    insertTodo({ dispatch, commit, getters }) {
-      let opts = { msg: "insert_todo" };
-      dispatch("callTodoInsert")
-        .then(function(res) {
-          if (res.status == 200 && res.data.status == 200) {
-            opts.type = "success";
-            commit("unshiftToDoList", getters.todo); // 头部插入新增的待办事项
-            commit("toggleToDo"); // 切换对话框
-          } else {
-            opts.type = "error";
-          }
-        })
-        .finally(function() {
-          dispatch("notify", opts);
-        });
+    insertTodo() {
+      // let opts = { msg: "insert_todo" };
+      // dispatch("callTodoInsert")
+      //   .then(function(res) {
+      //     if (res.status == 200 && res.data.status == 200) {
+      //       opts.type = "success";
+      //       commit("unshiftToDoList", getters.todo); // 头部插入新增的待办事项
+      //       commit("toggleToDo"); // 切换对话框
+      //     } else {
+      //       opts.type = "error";
+      //     }
+      //   })
+      //   .finally(function() {
+      //     dispatch("notify", opts);
+      //   });
     },
-    updateTodo({ dispatch, commit, getters }) {
-      let opts = { msg: "update_todo" };
-      dispatch("callTodoUpdate")
-        .then(function(res) {
-          if (res.status == 200 && res.data.status == 200) {
-            opts.type = "success";
-            let todo = getters.todo;
-            commit("deleteToDo", todo.index); // 删除更新前的待办事项
-            commit("unshiftToDoList", todo); // 头部插入更新的待办事项
-            commit("toggleToDo"); // 切换对话框
-          } else {
-            opts.type = "error";
-          }
-        })
-        .finally(function() {
-          dispatch("notify", opts);
-        });
+    updateTodo() {
+      // let opts = { msg: "update_todo" };
+      // dispatch("callTodoUpdate")
+      //   .then(function(res) {
+      //     if (res.status == 200 && res.data.status == 200) {
+      //       opts.type = "success";
+      //       let todo = getters.todo;
+      //       commit("deleteToDo", todo.index); // 删除更新前的待办事项
+      //       commit("unshiftToDoList", todo); // 头部插入更新的待办事项
+      //       commit("toggleToDo"); // 切换对话框
+      //     } else {
+      //       opts.type = "error";
+      //     }
+      //   })
+      //   .finally(function() {
+      //     dispatch("notify", opts);
+      //   });
     },
-    getTodoList({ dispatch, commit }) {
+    getTodoList({ commit }) {
       commit("setAppLoadingText", "getTodoList");
-      dispatch("callTodoList")
-        .then(function(res) {
-          if (res.status == 200 && res.data.status == 200) {
-            commit("setAppLoadingText", "getTodoList_success");
-            commit(
-              "setToDoList",
-              res.data.data.map((v) => {
-                v.checked = false;
-                return v;
-              })
-            );
-          } else {
-            commit("setAppLoadingText", "getTodoList_error");
-          }
-        })
-        .finally(function() {
-          commit("toggleAppLoading");
-        });
+      // dispatch("callTodoList")
+      //   .then(function(res) {
+      //     if (res.status == 200 && res.data.status == 200) {
+      //       commit("setAppLoadingText", "getTodoList_success");
+      //       commit(
+      //         "setToDoList",
+      //         res.data.data.map((v) => {
+      //           v.checked = false;
+      //           return v;
+      //         })
+      //       );
+      //     } else {
+      //       commit("setAppLoadingText", "getTodoList_error");
+      //     }
+      //   })
+      //   .finally(function() {
+      //     commit("toggleAppLoading");
+      //   });
     },
     getTodo() {},
   },
